@@ -1,0 +1,271 @@
+*
+{
+	box-sizing: border-box;
+}
+body
+{
+	margin: 0;
+	padding: 0;
+	font-family: 'Lato';
+}
+#game
+{
+	padding-top: 150px;
+	width: 100vw;
+	height: 100vh;
+	background-color: #485461;
+	display: flex;
+	justify-content: center;
+}
+#game::before
+{
+	content: '';
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-image: url(./bg.jpg);
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	filter: blur(6px);
+}
+.game__panel
+{
+	position: relative;
+	display: flex;
+	z-index: 2;
+	background-color: #fff;
+	width: 70%;
+	height: 80%;
+	border-radius: 10px;
+	overflow: hidden;
+	box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.3);
+}
+.game__container
+{
+	width: 100%;
+}
+.game__left
+{
+	padding-left: 50px;
+}
+.game__right
+{
+	padding-right: 50px;
+}
+.game__left,
+.game__right
+{
+	padding-top: 50px;
+	padding-bottom: 50px;
+	width: 50%;
+	height: 100%;
+	text-align: center;
+}
+.game__cur
+{
+	background-color: #f9f9f9;
+}
+.game__team-name
+{
+	margin: 0;
+	font-size: 24px;
+	font-weight: 300;
+	margin-bottom: 10px;
+	text-transform: uppercase;
+}
+.game__input
+{
+	width: 250px;
+	height: 50px;
+	outline: none;
+	padding: 5px 10px;
+	font-size: 16px;
+	text-transform: uppercase;
+	text-align: center;
+}
+.game__team-score
+{
+	font-size: 100px;
+	color: #EB4D4D;
+	font-weight: 100;
+	margin-top: 50px;
+}
+.game__start
+{
+	cursor: pointer;
+	font-size: 30px;
+	position: absolute;
+	top: 95px;
+	left: 50%;
+	transform: translateX(-50%);
+	color: #de7575;
+	transition: 0.2s;
+}
+.game__start:hover
+{
+	color: #EB4D4D;
+}
+.game__team-balance
+{
+	font-family: 'Lato';
+	font-weight: 200;
+	font-size: 28px;
+	margin-top: 20px;
+}
+.game__goal
+{
+	position: absolute;
+	width: 100px;
+	height: 40px;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 150px;
+	font-weight: 200;
+	background-color: transparent;
+	font-size: 20px;
+	border: 1px solid #EB4D4D;
+	text-transform: uppercase;
+	color: #EB4D4D;
+	transition: 0.2s;
+	cursor: pointer;
+	outline: none;
+}
+.game__goal:hover
+{
+	background-color: #EB4D4D;
+	color: #fff;
+}
+.game__winner
+{
+	width: 100%;
+	text-align: center;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 60px;
+	font-size: 24px;
+	font-weight: 300;
+}
+@-webkit-keyframes shake
+{
+	0% { -webkit-transform: translate(2px, 1px) rotate(0deg); }
+	10% { -webkit-transform: translate(-1px, -2px) rotate(-1deg); }
+	20% { -webkit-transform: translate(-3px, 0px) rotate(1deg); }
+	30% { -webkit-transform: translate(0px, 2px) rotate(0deg); }
+	40% { -webkit-transform: translate(1px, -1px) rotate(1deg); }
+	50% { -webkit-transform: translate(-1px, 2px) rotate(-1deg); }
+	60% { -webkit-transform: translate(-3px, 1px) rotate(0deg); }
+	70% { -webkit-transform: translate(2px, 1px) rotate(-1deg); }
+	80% { -webkit-transform: translate(-1px, -1px) rotate(1deg); }
+	90% { -webkit-transform: translate(2px, 2px) rotate(0deg); }
+	100% { -webkit-transform: translate(1px, -2px) rotate(-1deg); }
+}
+.game__panel.game__stopped
+{
+	-webkit-animation-name: shake;
+	-webkit-animation-duration: 0.8s;
+	-webkit-transform-origin:50% 50%;
+	-webkit-animation-timing-function: linear;
+} 
+/* .game__title
+{
+	font-size: 48px;
+	font-family: 'Alfa Slab One', sans-serif;
+	margin-bottom: 15px;
+}
+.game__button
+{
+	width: 100%;
+	height: 30px;
+	font-size: 14px;
+	font-family: 'Ubuntu';
+	margin-bottom: 10px;
+}
+.game__teams-info,
+.game__teams-balance
+{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.game__teams-balance
+{
+	margin-bottom: 15px;
+}
+.game__teams-balance-val
+{
+	font-size: 14px;
+	font-family: 'Ubuntu';
+}
+.game__team
+{
+	width: 110px;
+	overflow: hidden;
+	max-width: 110px;
+	font-size: 20px;
+	font-family: 'Ubuntu';
+}
+.game__team:last-child
+{
+	text-align-last: right;
+}
+.game__team_cur
+{
+	color: red;
+}
+.game__score
+{
+	font-size: 22px;
+	font-family: 'Ubuntu';
+}
+.game__inputs
+{
+	display: flex;
+	justify-content: space-between;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	outline: none;
+}
+.game__input
+{
+	font-size: 14px;
+	width: 110px;
+	height: 25px;
+	font-family: 'Ubuntu';
+	padding-left: 5px;
+	padding-right: 5px;
+}
+.game__start,
+.game__winner
+{
+	font-size: 14px;
+	font-family: 'Ubuntu';
+}
+.game__winner
+{
+	margin-top: 15px;
+}
+@-webkit-keyframes shake
+{
+	0% { -webkit-transform: translate(2px, 1px) rotate(0deg); }
+	10% { -webkit-transform: translate(-1px, -2px) rotate(-1deg); }
+	20% { -webkit-transform: translate(-3px, 0px) rotate(1deg); }
+	30% { -webkit-transform: translate(0px, 2px) rotate(0deg); }
+	40% { -webkit-transform: translate(1px, -1px) rotate(1deg); }
+	50% { -webkit-transform: translate(-1px, 2px) rotate(-1deg); }
+	60% { -webkit-transform: translate(-3px, 1px) rotate(0deg); }
+	70% { -webkit-transform: translate(2px, 1px) rotate(-1deg); }
+	80% { -webkit-transform: translate(-1px, -1px) rotate(1deg); }
+	90% { -webkit-transform: translate(2px, 2px) rotate(0deg); }
+	100% { -webkit-transform: translate(1px, -2px) rotate(-1deg); }
+}
+.game__container.game__stopped
+{
+	-webkit-animation-name: shake;
+	-webkit-animation-duration: 0.8s;
+	-webkit-transform-origin:50% 50%;
+	-webkit-animation-timing-function: linear;
+} */
