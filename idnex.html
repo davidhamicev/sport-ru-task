@@ -21,9 +21,9 @@
 						v-model="teames[0].name"
 						placeholder="Enter your team name"
 					>
-					<div class="game__team-score">{{ teames[0].score }}</div>
-					<div class="game__team-balance" v-if="isGameStarted">
-						<div class="game__team-text">Left</div>
+					<div class="game__score">{{ teames[0].score }}</div>
+					<div class="game__balance" v-if="isGameStarted">
+						<span>Left</span>
 						{{ teames[0].goalsBalance }}
 					</div>
 				</div>
@@ -35,16 +35,16 @@
 						class="game__input"
 						v-model="teames[1].name"
 						placeholder="Enter your team name">
-					<div class="game__team-score">{{ teames[1].score }}</div>
-					<div class="game__team-balance" v-if="isGameStarted">
-						<div class="game__team-text">Left</div>
+					<div class="game__score">{{ teames[1].score }}</div>
+					<div class="game__balance" v-if="isGameStarted">
+						<span>Left</span>
 						{{ teames[1].goalsBalance }}
 					</div>
 				</div>
 
 				<button class="game__new" @click="startNewGame"><i class="fas fa-sync"></i>New game</button>
 				<button class="game__start" @click="gameStart"><i class="fas fa-play"></i></button>
-				<button class="game__goal" @click="goal" v-if="isGameStarted">Goal</button>
+				<button class="game__goal" @click="goal" v-show="isGameStarted">Goal</button>
 				
 				<div class="game__winner" v-if="isFastWin() || isGameStopped()">
 					The "{{ winnerTeam }}" won {{ teames[0].score }} : {{ teames[1].score }}.

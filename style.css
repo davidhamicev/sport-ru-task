@@ -68,6 +68,16 @@ body
 {
 	background-color: #f9f9f9;
 }
+.game__cur .game__team-name::after
+{
+	content: "\2022";
+	font-size: 36px;
+	line-height: 18px;
+	position: absolute;
+	color: #EB4D4D;
+	top: 2px;
+	right: 35px;
+}
 .game__team-name
 {
 	margin: 0;
@@ -75,6 +85,7 @@ body
 	font-weight: 300;
 	margin-bottom: 10px;
 	text-transform: uppercase;
+	position: relative;
 }
 .game__input
 {
@@ -86,7 +97,7 @@ body
 	text-transform: uppercase;
 	text-align: center;
 }
-.game__team-score
+.game__score
 {
 	font-size: 100px;
 	color: #EB4D4D;
@@ -112,12 +123,14 @@ body
 	color: #EB4D4D;
 	transform: translateX(-50%) scale(1.1);
 }
-.game__team-balance
+.game__balance
 {
 	font-family: 'Lato';
 	font-weight: 200;
 	font-size: 28px;
 	margin-top: 20px;
+	display: flex;
+	flex-direction: column;
 }
 .game__goal
 {
@@ -173,9 +186,10 @@ body
 	position: absolute;
 	left: 50%;
 	transform: translateX(-50%);
-	bottom: 60px;
+	bottom: 45px;
 	font-size: 24px;
 	font-weight: 300;
+	text-transform: uppercase;
 }
 @-webkit-keyframes shake
 {
