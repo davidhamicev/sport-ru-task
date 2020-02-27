@@ -1,76 +1,103 @@
 Vue.config.devtools = true;
+const GOALS_COUNT = 5;
 new Vue({
 	el: '#game',
 	data: {
 		isGameStarted: false,
 		currentTeam: null,
 		winnerTeam: null,
-		goalsCount: 5,
+		goalsCount: GOALS_COUNT,
 		roundsCount: 0,
 		teames: [
 			{
-				name: 'dave',
+				name: 'cat',
 				score: 0,
 				isCurrent: false,
-				goalsBalance: 5
+				goalsBalance: GOALS_COUNT
 			},
 			{
-				name: 'jor',
+				name: 'dog',
 				score: 0,
 				isCurrent: false,
-				goalsBalance: 5
+				goalsBalance: GOALS_COUNT
 			}
 		]
 	},
 	methods: {
-		gameStart()
-		{
+		/**
+		 * ЗАПУСК ИГРЫ
+		 * игра не будет запущена до тех пора,
+		 * пока обе команды не введут название команд
+		 */
+		gameStart() {
 			if (this.teames[0].name && this.teames[1].name) {
 				this.isGameStarted = true;
+				let randomTeam = this.getRandom();
+				this.defineFirstTeam(randomTeam);
 			}
-			let randomTeam = this.getRandom();
-			this.defineFirstTeam(randomTeam);
 		},
-		getRandom()
-		{
-			return +(Math.random() < 0.5);
-		},
-		defineFirstTeam(number)
-		{
+		/**
+		 * Получает параметр с номером команды,
+		 * которая будет делать первый ход.
+		 * И меняется состояние у команды
+		 * с соответсвующим номером
+		 */
+		defineFirstTeam(number) {
 			this.teames.forEach((team, index) => {
 				team.isCurrent = index == number ? true : false
 			});
 			this.currentTeam = number;
 		},
-		goal(event)
-		{
-			console.log('goal');
-			
+		getRandom() {
+			return +(Math.random() < 0.5);
+		},
+		/**
+		 * Имитация удара
+		 */
+		goal(event) {
 			let randomGoal = this.getRandom();
 			this.teames[this.currentTeam].score += randomGoal;
 			this.teames[this.currentTeam].goalsBalance--;
-
-			if (this.isGameStopped() || this.isFastWin())
+			
+			if (this.isFastWin() || this.isGameStopped())
 				this.defineWinner(event);
 			else
 			{
-				this.nextMove();
 				this.roundsCount++;
+				this.nextMove();
 			}
+
 		},
-		isGameStopped()
-		{
+		/**
+		 * Проверка завершения игры
+		 * если все команды выполнили свои удары,
+		 * игра прекращается
+		 */
+		isGameStopped() {
 			return !this.teames[0].goalsBalance && !this.teames[1].goalsBalance ? true : false;
 		},
+		/**
+		 * 
+		 */
 		isFastWin()
 		{
-			if (Math.floor(this.roundsCount / 2) > 3)
+			const isFinishedCurrentRound = !Math.abs(this.teames[0].goalsBalance - this.teames[1].goalsBalance);
+			const isMiddleOfGame = Math.ceil(this.roundsCount / 2) > Math.ceil(this.goalsCount / 2);
+			// console.log(isMiddleOfGame);
+			// if (Math.floor(this.goalsCount / 2) < Math.floor(this.roundsCount / 2))
+			if (isMiddleOfGame && isFinishedCurrentRound)
 			{
-				let goalsDec = Math.abs(this.teames[0].goalsBalance - this.teames[1].goalsBalance);
+				console.log(Math.floor(this.roundsCount / 2));
+				console.log(Math.ceil(this.goalsCount / 2));
+				
+				let goalsDec = !Math.abs(this.teames[0].goalsBalance - this.teames[1].goalsBalance);
 				let scoreDec = Math.abs(this.teames[0].score - this.teames[1].score);
 				
-				if (scoreDec >= Math.floor(this.goalsCount / 2) && !goalsDec)
+				if ( (scoreDec >= Math.floor(this.goalsCount / 2) ) && goalsDec)
+				{
+					//call defineWinenr();
 					return true;
+				}
 				else
 					return false;
 			}
@@ -82,13 +109,26 @@ new Vue({
 			});
 			this.currentTeam = this.currentTeam === 0 ? 1 : 0;
 		},
+		/**
+		 * Определение победителя игры
+		 */
 		defineWinner(eventElement)
 		{
-			eventElement.target.disabled = true;
+			/**
+			 * случай, когда все игроки выполнили свои ходы,
+			 * и выигрывает команда, забившая большее 
+			 * количество голов ( teams[i].score )
+			 */
 			if ( (this.teames[0].score > this.teames[1].score) )
 			{
 				this.winnerTeam = this.teames[0].name;
+				eventElement.target.disabled = true;
 			}
+			/**
+			 * случай, когда серия заверишилась ничьей, и, 
+			 * каждой команде добавляется по одному ходу,
+			 * пока кто-то не забьет первым
+			 */
 			else if (this.teames[0].score === this.teames[1].score)
 			{
 				this.teames.forEach((team) => {
@@ -98,7 +138,24 @@ new Vue({
 			else
 			{
 				this.winnerTeam = this.teames[1].name;
+				eventElement.target.disabled = true;
 			}
+		},
+		startNewGame()
+		{
+			this.isGameStarted = false;
+			this.roundsCount = 0;
+			this.winnerTeam = null;
+			this.currentTeam = null;
+			document.querySelector('.game__goal').disabled = false;
+
+			this.teames.forEach(team => {
+				team.name = 'ss';
+				team.score = 0;
+				team.isCurrent = false;
+				team.goalsBalance = GOALS_COUNT;
+			})
+			
 		}
 	}
 });
