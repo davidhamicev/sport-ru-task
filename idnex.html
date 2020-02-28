@@ -49,63 +49,6 @@
 				<div class="game__winner" v-if="isFastWin() || isGameStopped()">
 					The "{{ winnerTeam }}" won {{ teames[0].score }} : {{ teames[1].score }}.
 				</div>
-				<!-- <div class="game__container" :class="{ game__stopped: isFastWin() || isGameStopped() }">
-					<h1 class="game__title">Game board</h1>
-					<div class="game__board">
-						<div class="game__inputs">
-							<input class="game__input"
-									v-model="teames[0].name"
-									type="text"
-									placeholder="Your team name"
-							>
-							<button class="game__start" 
-									@click="gameStart"
-							>Играть
-							</button>
-							<input class="game__input"
-									placeholder="Your team name"
-									v-model="teames[1].name"
-									type="text"
-							>
-						</div>
-						<button class="game__button" @click="goal">Удар</button>
-						<div class="game__teams" v-if="isGameStarted">
-							<div class="game__teams-balance">
-								<div class="game__teams-balance-val">
-									ударов - {{ teames[0].goalsBalance }}
-								</div>
-								<div class="game__score">
-									Счет
-								</div>
-								<div class="game__teams-balance-val">
-									{{ teames[1].goalsBalance }} - ударов
-								</div>
-							</div>
-							<div class="game__teams-info">
-								<div class="game__team"
-									:class="{ game__team_cur: teames[0].isCurrent && !isGameStopped() }">
-									{{ teames[0].name }}
-								</div>
-								<div class="game__score">
-									<span>
-										{{ teames[0].score }}
-									</span>
-									:
-									<span>
-										{{ teames[1].score }}
-									</span>
-								</div>
-								<div class="game__team"
-									:class="{ game__team_cur: teames[1].isCurrent && !isGameStopped() }">
-									{{ teames[1].name }}
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="game__winner" v-if="isFastWin() || isGameStopped()">
-						Победила команда "{{ winnerTeam }}" со счетом {{ teames[0].score }} : {{ teames[1].score }}.
-					</div>
-				</div> -->
 			</div>
 		</div>
 		<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
